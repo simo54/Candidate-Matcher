@@ -1,13 +1,12 @@
 import PyPDF2
 from PyPDF2 import PdfFileReader
-from tkinter import Button, Entry, Label, Text, Tk, messagebox
+from tkinter import Button, Tk, filedialog
 
 # GUI Specifications
 root = Tk()
 root.title("ATS")
 
 # GUI position
-# ================ Centering GUI on launch ================ #
 window_width = 700
 window_height = 450
 
@@ -22,11 +21,13 @@ root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 # declaring key words
 key_words = ["one", "two", "three"]
 
-# uploading pdf file
+# uploading file
 
 
 def upload():
-    print("hey")
+    file = filedialog.askopenfilename()
+    if file != file.lower().endswith(('.pdf', '.doc', '.docx', '.odt', '.txt', '.xml', '.xps', 'rtf')):
+        print("ah")
 
 
 # widgets list
@@ -34,6 +35,6 @@ button_upload = Button(root, text="Upload", padx=10, pady=5, command=upload)
 
 # display widgets
 button_upload.pack()
-# runner
 
+# runner
 root.mainloop()
