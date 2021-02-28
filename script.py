@@ -1,8 +1,11 @@
 import os
 import PyPDF2
 import docx
+
+from pathlib import Path
 from PyPDF2 import PdfFileReader
 from tkinter import Button, Tk, filedialog, messagebox
+
 
 # GUI Specifications
 root = Tk()
@@ -27,11 +30,19 @@ key_words = ["one", "two", "three"]
 
 
 def upload():
-    file = filedialog.askopenfilename()
-    name, extension = os.path.splitext(file)
-    print(extension)
+    file_path = filedialog.askopenfilename()
+    data_path = Path(file_path)
+    name, extension = os.path.splitext(file_path)
+
     if extension == '.pdf':
-        print("ok")
+        with open(data_path, 'rb') as input:
+            inputStream = PyPDF2.PdfFileReader(input)
+            number_of_pages = inputStream.getNumPages()
+            print(number_of_pages)
+
+    elif extension == '.docx':
+        inputStream = docx.Document(data_path)
+        print(inputStream)
     else:
         messagebox.showinfo("WARNING", "Please upload a valid document")
 
