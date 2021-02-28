@@ -1,6 +1,8 @@
+import os
 import PyPDF2
+import docx
 from PyPDF2 import PdfFileReader
-from tkinter import Button, Tk, filedialog
+from tkinter import Button, Tk, filedialog, messagebox
 
 # GUI Specifications
 root = Tk()
@@ -26,8 +28,12 @@ key_words = ["one", "two", "three"]
 
 def upload():
     file = filedialog.askopenfilename()
-    if file != file.lower().endswith(('.pdf', '.doc', '.docx', '.odt', '.txt', '.xml', '.xps', 'rtf')):
-        print("ah")
+    name, extension = os.path.splitext(file)
+    print(extension)
+    if extension == '.pdf':
+        print("ok")
+    else:
+        messagebox.showinfo("WARNING", "Please upload a valid document")
 
 
 # widgets list
