@@ -23,7 +23,7 @@ y = (screen_height / 2)-(window_height / 2)
 root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
 # declaring key words
-key_words = ["one", "two", "three"]
+key_words = ["simone", "html", "js"]
 
 # uploading file
 
@@ -35,11 +35,24 @@ def upload():
 
     if extension == '.pdf':
         text_to_analyze = ''
+        results = []
         with pdfplumber.open(data_path) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
                 text_to_analyze = text_to_analyze + '\n' + page_text
-            print(text_to_analyze)
+            for key_word in key_words:
+                count = text_to_analyze.count(key_word)
+                print(key_word)
+                if count == 0:
+                    print("count is 0")
+                    key_word_upper = key_word.upper()
+                    print(key_word_upper)
+                    count = text_to_analyze.count(key_word_upper)
+                    results.append(count)
+                else:
+                    results.append(count)
+            print(results)
+            # print(text_to_analyze)
 
     elif extension == '.docx':
         inputStream = docx.Document(data_path)
