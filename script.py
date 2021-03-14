@@ -34,12 +34,12 @@ def upload():
     name, extension = os.path.splitext(file_path)
 
     if extension == '.pdf':
+        text_to_analyze = ''
         with pdfplumber.open(data_path) as pdf:
-            first_page = pdf.pages[0]
-            print(first_page.page_number)
-            text = first_page.extract_text()  # type => str
-            print(text)
-            pdf.close()
+            for page in pdf.pages:
+                page_text = page.extract_text()
+                text_to_analyze = text_to_analyze + '\n' + page_text
+            print(text_to_analyze)
 
     elif extension == '.docx':
         inputStream = docx.Document(data_path)
