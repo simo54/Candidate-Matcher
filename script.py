@@ -37,7 +37,6 @@ def upload():
     if extension == '.pdf':
         text_to_analyze = ''
         results = []
-        score = 0
         with pdfplumber.open(data_path) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
@@ -74,6 +73,14 @@ def upload():
             match = text_formatted.count(key_word_formatted)
             results.append(match)
         print(results)
+        print(len(results))
+        hits = [x for x in results if x != 0]
+        print(hits)
+        print(len(hits))
+        no_hits = [x for x in results if x == 0]
+        print(no_hits)
+        print(len(no_hits))
+        print("{:.0%}".format(len(hits) / len(results)))
 
     else:
         messagebox.showinfo("WARNING", "Please upload a valid document")
