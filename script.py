@@ -1,3 +1,4 @@
+from __future__ import division
 import os
 import docx
 import pdfplumber
@@ -23,7 +24,7 @@ y = (screen_height / 2)-(window_height / 2)
 root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
 # declaring key words
-key_words = ["python", "team", "react"]
+key_words = ["python", "team", "joy", "javascript", "node"]
 
 # uploading file
 
@@ -36,6 +37,7 @@ def upload():
     if extension == '.pdf':
         text_to_analyze = ''
         results = []
+        score = 0
         with pdfplumber.open(data_path) as pdf:
             for page in pdf.pages:
                 page_text = page.extract_text()
@@ -48,7 +50,15 @@ def upload():
                 key_word_formatted = key_word.lower()
                 match = text_formatted.count(key_word_formatted)
                 results.append(match)
-            print(results)
+        print(results)
+        print(len(results))
+        hits = [x for x in results if x != 0]
+        print(hits)
+        print(len(hits))
+        no_hits = [x for x in results if x == 0]
+        print(no_hits)
+        print(len(no_hits))
+        print("{:.0%}".format(len(hits) / len(results)))
 
     elif extension == '.docx':
         doc = docx.Document(data_path)
@@ -65,7 +75,6 @@ def upload():
             results.append(match)
         print(results)
 
-        print(text_formatted)
     else:
         messagebox.showinfo("WARNING", "Please upload a valid document")
 
