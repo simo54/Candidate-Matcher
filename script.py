@@ -1,9 +1,8 @@
 import os
-import PyPDF2
 import docx
+import pdfplumber
 
 from pathlib import Path
-from PyPDF2 import PdfFileReader
 from tkinter import Button, Tk, filedialog, messagebox
 
 
@@ -35,10 +34,12 @@ def upload():
     name, extension = os.path.splitext(file_path)
 
     if extension == '.pdf':
-        with open(data_path, 'rb') as input:
-            inputStream = PyPDF2.PdfFileReader(input)
-            number_of_pages = inputStream.getNumPages()
-            print(number_of_pages)
+        with pdfplumber.open(data_path) as pdf:
+            first_page = pdf.pages[0]
+            print(first_page.page_number)
+            text = first_page.extract_text()  # type => str
+            print(text)
+            pdf.close()
 
     elif extension == '.docx':
         inputStream = docx.Document(data_path)
