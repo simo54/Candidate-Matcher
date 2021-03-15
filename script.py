@@ -2,10 +2,10 @@ from __future__ import division
 import os
 import docx
 import pdfplumber
-import glob
 
 from pathlib import Path
 from tkinter import Button, Tk, filedialog, messagebox
+from openpyxl import Workbook, load_workbook
 
 
 # GUI Specifications
@@ -27,8 +27,11 @@ root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 # declaring key words
 key_words = ["python", "team", "joy", "javascript", "node"]
 
+# creating xlsx file
 
-# uploading file
+workbook = Workbook()
+excel_file = Path("./score_sheet.xlsx")
+# uploading files
 
 
 def upload():
@@ -38,8 +41,6 @@ def upload():
         name, extension = os.path.splitext(file)
 
         if extension == '.pdf':
-            print("test pdf")
-
             text_to_analyze = ''
             results = []
             with pdfplumber.open(file) as pdf:
@@ -64,8 +65,29 @@ def upload():
             print(len(no_hits))
             print("{:.0%}".format(len(hits) / len(results)))
 
+            value_row = [[str(os.path.basename(
+                file)), str("{:.0%}".format(len(hits) / len(results)))]]
+
+            if excel_file.is_file():
+
+                working_file = load_workbook(filename=excel_file)
+                file_sheet = working_file['Sheet1']
+                row = file_sheet.get_highest_row() + 1
+                print(row)
+
+                for col, entry in enumerate(value_row, start=1):
+                    file_sheet.cell(row=row, column=col, value=entry)
+
+                working_file.save(filename="score_sheet.xlsx")
+
+            else:
+                page = workbook.active
+                for data in value_row:
+                    page.append(data)
+
+                workbook.save(filename="score_sheet.xlsx")
+
         elif extension == '.docx':
-            print("test docx")
             doc = docx.Document(file)
             text_to_analyze = ''
             results = []
