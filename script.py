@@ -2,6 +2,7 @@ from __future__ import division
 import os
 import docx
 import pdfplumber
+import glob
 
 from pathlib import Path
 from tkinter import Button, Tk, filedialog, messagebox
@@ -26,22 +27,54 @@ root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 # declaring key words
 key_words = ["python", "team", "joy", "javascript", "node"]
 
+
 # uploading file
 
 
 def upload():
-    file_path = filedialog.askopenfilename()
-    data_path = Path(file_path)
-    name, extension = os.path.splitext(file_path)
+    file_formats = [("*.pdf", "*.docx")]
+    file_path_list = filedialog.askopenfilenames(
+        filetypes=file_formats, initialdir="/", title='test')
+    # file_path = filedialog.askopenfilename()
 
-    if extension == '.pdf':
-        text_to_analyze = ''
-        results = []
-        with pdfplumber.open(data_path) as pdf:
-            for page in pdf.pages:
-                page_text = page.extract_text()
-                page_text.lower()
-                text_to_analyze = text_to_analyze + '\n' + page_text
+    for file in file_path_list:
+        # data_path = Path(file_path_list)
+        name, extension = os.path.splitext(file)
+
+        if extension == '.pdf':
+            print("pdf found!")
+
+            # text_to_analyze = ''
+            # results = []
+            # with pdfplumber.open(data_path) as pdf:
+            #     for page in pdf.pages:
+            #         page_text = page.extract_text()
+            #         page_text.lower()
+            #         text_to_analyze = text_to_analyze + '\n' + page_text
+
+            #     text_formatted = text_to_analyze.lower()
+
+            #     for key_word in key_words:
+            #         key_word_formatted = key_word.lower()
+            #         match = text_formatted.count(key_word_formatted)
+            #         results.append(match)
+            # print(results)
+            # print(len(results))
+            # hits = [x for x in results if x != 0]
+            # print(hits)
+            # print(len(hits))
+            # no_hits = [x for x in results if x == 0]
+            # print(no_hits)
+            # print(len(no_hits))
+            # print("{:.0%}".format(len(hits) / len(results)))
+
+        elif extension == '.docx':
+            print("hey")
+            doc = docx.Document(file)
+            text_to_analyze = ''
+            results = []
+            for docpara in doc.paragraphs:
+                text_to_analyze += docpara.text
 
             text_formatted = text_to_analyze.lower()
 
@@ -49,41 +82,22 @@ def upload():
                 key_word_formatted = key_word.lower()
                 match = text_formatted.count(key_word_formatted)
                 results.append(match)
-        print(results)
-        print(len(results))
-        hits = [x for x in results if x != 0]
-        print(hits)
-        print(len(hits))
-        no_hits = [x for x in results if x == 0]
-        print(no_hits)
-        print(len(no_hits))
-        print("{:.0%}".format(len(hits) / len(results)))
+            print(results)
+            print(len(results))
+            hits = [x for x in results if x != 0]
+            print(hits)
+            print(len(hits))
+            no_hits = [x for x in results if x == 0]
+            print(no_hits)
+            print(len(no_hits))
+            print("{:.0%}".format(len(hits) / len(results)))
 
-    elif extension == '.docx':
-        doc = docx.Document(data_path)
-        text_to_analyze = ''
-        results = []
-        for docpara in doc.paragraphs:
-            text_to_analyze += docpara.text
+    # data_path = Path(file_path)
+    # name, extension = os.path.splitext(file_path)
 
-        text_formatted = text_to_analyze.lower()
-
-        for key_word in key_words:
-            key_word_formatted = key_word.lower()
-            match = text_formatted.count(key_word_formatted)
-            results.append(match)
-        print(results)
-        print(len(results))
-        hits = [x for x in results if x != 0]
-        print(hits)
-        print(len(hits))
-        no_hits = [x for x in results if x == 0]
-        print(no_hits)
-        print(len(no_hits))
-        print("{:.0%}".format(len(hits) / len(results)))
-
-    else:
-        messagebox.showinfo("WARNING", "Please upload a valid document")
+    #
+    # else:
+    #     messagebox.showinfo("WARNING", "Please upload a valid document")
 
 
 # widgets list
