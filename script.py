@@ -71,17 +71,17 @@ def upload():
             if excel_file.is_file():
 
                 working_file = load_workbook(filename=excel_file)
-                file_sheet = working_file['Sheet1']
-                row = file_sheet.get_highest_row() + 1
-                print(row)
+                # file_sheet = working_file.get_sheet_by_name('Sheet')
+                page = working_file.active
 
-                for col, entry in enumerate(value_row, start=1):
-                    file_sheet.cell(row=row, column=col, value=entry)
+                for data in value_row:
+                    page.append(data)
 
-                working_file.save(filename="score_sheet.xlsx")
+                working_file.save(filename=excel_file)
 
             else:
                 page = workbook.active
+
                 for data in value_row:
                     page.append(data)
 
