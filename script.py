@@ -110,6 +110,28 @@ def upload():
             print(len(no_hits))
             print("{:.0%}".format(len(hits) / len(results)))
 
+            value_row = [[str(os.path.basename(
+                file)), str("{:.0%}".format(len(hits) / len(results)))]]
+
+            if excel_file.is_file():
+
+                working_file = load_workbook(filename=excel_file)
+                # file_sheet = working_file.get_sheet_by_name('Sheet')
+                page = working_file.active
+
+                for data in value_row:
+                    page.append(data)
+
+                working_file.save(filename=excel_file)
+
+            else:
+                page = workbook.active
+
+                for data in value_row:
+                    page.append(data)
+
+                workbook.save(filename="score_sheet.xlsx")
+
         else:
             messagebox.showinfo("WARNING", "Please upload a valid document")
 
