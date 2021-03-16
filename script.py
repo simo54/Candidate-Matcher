@@ -2,6 +2,8 @@ from __future__ import division
 import os
 import docx
 import pdfplumber
+import re
+# import pandas as pd
 
 from pathlib import Path
 from tkinter import Button, Tk, filedialog, messagebox, PhotoImage, Label
@@ -37,7 +39,8 @@ excel_file = Path("./score_sheet.xlsx")
 
 
 def upload():
-    file_path_list = filedialog.askopenfilenames(initialdir="/", title='test')
+    file_path_list = filedialog.askopenfilenames(
+        initialdir="/", title='Upload single or multiple .pdf and/or .docx files')
 
     for file in file_path_list:
         name, extension = os.path.splitext(file)
@@ -61,6 +64,9 @@ def upload():
             score = str("{:.0%}".format(len(hits) / len(results)))
             value_row = [[str(os.path.basename(
                 file)), str("{:.0%}".format(len(hits) / len(results)))]]
+
+            email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
+            print(email_user.group(0))
 
             if excel_file.is_file():
                 working_file = load_workbook(filename=excel_file)
@@ -92,6 +98,9 @@ def upload():
             value_row = [[str(os.path.basename(
                 file)), score]]
 
+            # email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
+            # print(email_user.group(0))
+
             if excel_file.is_file():
                 working_file = load_workbook(filename=excel_file)
                 page = working_file.active
@@ -104,7 +113,6 @@ def upload():
                 for data in value_row:
                     page.append(data)
                 workbook.save(filename="score_sheet.xlsx")
-
         else:
             messagebox.showinfo("WARNING", "Please upload a valid document")
 
