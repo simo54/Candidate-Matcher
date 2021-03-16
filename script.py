@@ -12,7 +12,7 @@ from openpyxl import Workbook, load_workbook
 root = Tk()
 root.title("ATS")
 root.configure(background='#F0F3F7')
-
+root.iconbitmap('assets/mac_icon-icons.com_54610.ico')
 # GUI position
 window_width = 700
 window_height = 450
