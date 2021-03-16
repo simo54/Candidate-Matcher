@@ -4,13 +4,14 @@ import docx
 import pdfplumber
 
 from pathlib import Path
-from tkinter import Button, Tk, filedialog, messagebox
+from tkinter import Button, Tk, filedialog, messagebox, PhotoImage, Label
 from openpyxl import Workbook, load_workbook
 
 
 # GUI Specifications
 root = Tk()
 root.title("ATS")
+root.configure(background='#F0F3F7')
 
 # GUI position
 window_width = 700
@@ -24,6 +25,7 @@ y = (screen_height / 2)-(window_height / 2)
 
 root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
+upload_button = PhotoImage(file='assets/button_upload.png')
 # declaring key words
 key_words = ["python", "team", "joy", "javascript", "node"]
 
@@ -108,7 +110,8 @@ def upload():
 
 
 # widgets list
-button_upload = Button(root, text="Upload", padx=10, pady=5, command=upload)
+button_upload = Button(root, image=upload_button,
+                       padx=10, pady=5, command=upload, borderwidth=0)
 
 # display widgets
 button_upload.pack()
