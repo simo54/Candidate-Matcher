@@ -27,10 +27,10 @@ root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 # declaring key words
 key_words = ["python", "team", "joy", "javascript", "node"]
 
-# creating xlsx file
-
+# Xlsx file
 workbook = Workbook()
 excel_file = Path("./score_sheet.xlsx")
+
 # uploading files
 
 
@@ -55,36 +55,21 @@ def upload():
                     key_word_formatted = key_word.lower()
                     match = text_formatted.count(key_word_formatted)
                     results.append(match)
-            print(results)
-            print(len(results))
             hits = [x for x in results if x != 0]
-            print(hits)
-            print(len(hits))
-            no_hits = [x for x in results if x == 0]
-            print(no_hits)
-            print(len(no_hits))
-            print("{:.0%}".format(len(hits) / len(results)))
-
+            score = str("{:.0%}".format(len(hits) / len(results)))
             value_row = [[str(os.path.basename(
                 file)), str("{:.0%}".format(len(hits) / len(results)))]]
 
             if excel_file.is_file():
-
                 working_file = load_workbook(filename=excel_file)
-                # file_sheet = working_file.get_sheet_by_name('Sheet')
                 page = working_file.active
-
                 for data in value_row:
                     page.append(data)
-
                 working_file.save(filename=excel_file)
-
             else:
                 page = workbook.active
-
                 for data in value_row:
                     page.append(data)
-
                 workbook.save(filename="score_sheet.xlsx")
 
         elif extension == '.docx':
@@ -100,36 +85,22 @@ def upload():
                 key_word_formatted = key_word.lower()
                 match = text_formatted.count(key_word_formatted)
                 results.append(match)
-            print(results)
-            print(len(results))
             hits = [x for x in results if x != 0]
-            print(hits)
-            print(len(hits))
-            no_hits = [x for x in results if x == 0]
-            print(no_hits)
-            print(len(no_hits))
-            print("{:.0%}".format(len(hits) / len(results)))
-
+            score = str("{:.0%}".format(len(hits) / len(results)))
             value_row = [[str(os.path.basename(
-                file)), str("{:.0%}".format(len(hits) / len(results)))]]
+                file)), score]]
 
             if excel_file.is_file():
-
                 working_file = load_workbook(filename=excel_file)
-                # file_sheet = working_file.get_sheet_by_name('Sheet')
                 page = working_file.active
-
                 for data in value_row:
                     page.append(data)
-
                 working_file.save(filename=excel_file)
 
             else:
                 page = workbook.active
-
                 for data in value_row:
                     page.append(data)
-
                 workbook.save(filename="score_sheet.xlsx")
 
         else:
