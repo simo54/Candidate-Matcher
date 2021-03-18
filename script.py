@@ -1,6 +1,6 @@
 from __future__ import division
 import os
-import docx
+import docx2txt
 import pdfplumber
 import re
 # import pandas as pd
@@ -81,25 +81,22 @@ def upload():
                 workbook.save(filename="score_sheet.xlsx")
 
         elif extension == '.docx':
-            doc = docx.Document(file)
+            doc = docx2txt.process(file)
             text_to_analyze = ''
             results = []
-            for docpara in doc.paragraphs:
-                text_to_analyze += docpara.text
 
-            text_formatted = text_to_analyze.lower()
+            text_formatted = doc.lower()
 
             for key_word in key_words:
                 key_word_formatted = key_word.lower()
                 match = text_formatted.count(key_word_formatted)
                 results.append(match)
+
             hits = [x for x in results if x != 0]
             score = str("{:.0%}".format(len(hits) / len(results)))
             value_row = [[str(os.path.basename(
                 file)), score]]
-
-            # email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
-            # print(email_user.group(0))
+            email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
 
             if excel_file.is_file():
                 working_file = load_workbook(filename=excel_file)
