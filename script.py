@@ -3,10 +3,10 @@ import os
 import docx2txt
 import pdfplumber
 import re
-# import pandas as pd
 
 from pathlib import Path
 from tkinter import Button, Tk, filedialog, messagebox, PhotoImage, Label
+from tkinter.font import Font
 from openpyxl import Workbook, load_workbook
 
 
@@ -15,6 +15,7 @@ root = Tk()
 root.title("ATS")
 root.configure(background='#F0F3F7')
 root.iconbitmap('assets/mac_icon-icons.com_54610.ico')
+
 # GUI position
 window_width = 700
 window_height = 450
@@ -28,6 +29,7 @@ y = (screen_height / 2)-(window_height / 2)
 root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
 upload_button = PhotoImage(file='assets/button_upload.png')
+
 # declaring key words
 key_words = ["python", "team", "joy", "javascript", "node"]
 
@@ -60,13 +62,12 @@ def upload():
                     key_word_formatted = key_word.lower()
                     match = text_formatted.count(key_word_formatted)
                     results.append(match)
+
             hits = [x for x in results if x != 0]
             score = str("{:.0%}".format(len(hits) / len(results)))
             value_row = [[str(os.path.basename(
                 file)), str("{:.0%}".format(len(hits) / len(results)))]]
-
             email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
-            print(email_user.group(0))
 
             if excel_file.is_file():
                 working_file = load_workbook(filename=excel_file)
@@ -84,7 +85,6 @@ def upload():
             doc = docx2txt.process(file)
             text_to_analyze = ''
             results = []
-
             text_formatted = doc.lower()
 
             for key_word in key_words:
@@ -115,10 +115,13 @@ def upload():
 
 
 # widgets list
+title_font = Font(family="Courier", size=36)
+title_text = Label(root, text="ATS", font=title_font)
 button_upload = Button(root, image=upload_button,
                        padx=10, pady=5, command=upload, borderwidth=0)
 
 # display widgets
+title_text.pack()
 button_upload.pack()
 
 # runner
