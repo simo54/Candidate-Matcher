@@ -5,6 +5,7 @@ import os
 from xlsx_file import workbook, excel_file
 from openpyxl import load_workbook
 from key_words import key_words
+from load_and_write import load_and_write
 
 
 def upload_pdf(file):
@@ -29,14 +30,4 @@ def upload_pdf(file):
         file)), str("{:.0%}".format(len(hits) / len(results)))]]
     email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
 
-    if excel_file.is_file():
-        working_file = load_workbook(filename=excel_file)
-        page = working_file.active
-        for data in value_row:
-            page.append(data)
-        working_file.save(filename=excel_file)
-    else:
-        page = workbook.active
-        for data in value_row:
-            page.append(data)
-        workbook.save(filename="score_sheet.xlsx")
+    load_and_write(value_row)
