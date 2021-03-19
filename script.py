@@ -5,6 +5,7 @@ from tkinter.font import Font
 from openpyxl import Workbook, load_workbook
 from upload_pdf import upload_pdf
 from upload_docx import upload_docx
+from PIL import ImageTk, Image
 
 import os
 
@@ -17,8 +18,8 @@ def main():
     root.iconbitmap('assets/mac_icon-icons.com_54610.ico')
 
     # GUI position
-    window_width = 700
-    window_height = 450
+    window_width = 800
+    window_height = 550
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -29,6 +30,10 @@ def main():
     root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
     upload_button = PhotoImage(file='assets/button_upload.png')
+
+    main_picture = Image.open("./assets/cup-of-coffee-1280537_1920.png")
+    main_picture = main_picture.resize((550, 350), Image.ANTIALIAS)
+    main_picture = ImageTk.PhotoImage(main_picture)
 
     def upload():
         file_path_list = filedialog.askopenfilenames(
@@ -53,12 +58,17 @@ def main():
     # widgets list
     title_font = Font(family="Courier", size=36)
     title_text = Label(root, text="ATS", font=title_font)
+
+    label_picture = Label(image=main_picture)
+
     button_upload = Button(root, image=upload_button,
                            padx=10, pady=5, command=upload, borderwidth=0)
-
+    button_quit = Button(root, text="Exit Program", command=root.quit)
     # display widgets
     title_text.pack()
+    label_picture.pack()
     button_upload.pack()
+    button_quit.pack()
 
     # runner
     root.mainloop()
