@@ -13,4 +13,5 @@ def load_and_write(value_row):
         page = workbook.active
         for data in value_row:
             page.append(data)
+
         workbook.save(filename="score_sheet.xlsx")
