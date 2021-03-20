@@ -6,7 +6,7 @@ from openpyxl import Workbook, load_workbook
 from upload_pdf import upload_pdf
 from upload_docx import upload_docx
 from PIL import ImageTk, Image
-from key_words import write_keywords
+from key_words import write_keywords, return_keys
 
 import os
 
@@ -32,11 +32,8 @@ def main():
 
     # Assets Images
     upload_button = PhotoImage(file='assets/button_upload.png')
-
     keys_button = PhotoImage(file='assets/button_keywords.png')
-
     quit_button = PhotoImage(file='assets/button_exit.png')
-
     main_picture = Image.open("./assets/cup-of-coffee-1280537_1920.png")
     main_picture = main_picture.resize((550, 350), Image.ANTIALIAS)
     main_picture = ImageTk.PhotoImage(main_picture)
@@ -62,18 +59,23 @@ def main():
         messagebox.askquestion("askquestion", "Are you sure?")
 
     def define_keywords():
+        def get_text():
+            text_to_pass = input_keywords.get(1.0, "end-1c")
+            write_keywords(text_to_pass)
         window = Toplevel()
 
         info = Label(
             window, text="Please declare here your keywords following this example: ")
         example = Label(window, text="Example: ")
-        input = Text(window)
-        button_save = Button(window, text="Save", command=write_keywords)
+        input_keywords = Text(window)
+        input_keywords.insert(1.0, return_keys())
+        button_save = Button(window, text="Save",
+                             command=get_text)
         button_close = Button(window, text="Close", command=window.destroy)
 
         info.pack(fill='x', padx=50, pady=5)
         example.pack(fill='x')
-        input.pack(padx=30, pady=5)
+        input_keywords.pack(padx=30, pady=5)
         button_save.pack()
         button_close.pack()
 
