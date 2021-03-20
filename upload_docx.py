@@ -29,8 +29,8 @@ def upload_docx(file):
     email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
     phone_number = re.findall(
         r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', text_formatted)
-    print(phone_number)
+
     value_row = [[str(os.path.basename(
-        file)), str(score), str(email_user.group(0))]]
+        file)), str(score), str(email_user.group(0)), str(phone_number)]]
 
     load_and_write(value_row)

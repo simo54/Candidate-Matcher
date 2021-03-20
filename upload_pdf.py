@@ -25,9 +25,16 @@ def upload_pdf(file):
             results.append(match)
 
     hits = [x for x in results if x != 0]
-    score = str("{:.0%}".format(len(hits) / len(results)))
-    email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
-    value_row = [[str(os.path.basename(
-        file)), str(score), str(email_user.group(0))]]
 
+    try:
+        score = str("{:.0%}".format(len(hits) / len(results)))
+    except ZeroDivisionError:
+        score = 0
+
+    email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
+    phone_number = re.findall(
+        r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]', text_formatted)
+
+    value_row = [[str(os.path.basename(file)), str(score),
+                  str(email_user.group(0)), str(phone_number)]]
     load_and_write(value_row)

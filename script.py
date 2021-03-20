@@ -62,7 +62,18 @@ def main():
         def get_text():
             text_to_pass = input_keywords.get(1.0, "end-1c")
             write_keywords(text_to_pass)
+
+        window_width = 600
+        window_height = 550
+
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+
+        x = (screen_width / 2)-(window_width / 2)
+        y = (screen_height / 2)-(window_height / 2)
+
         window = Toplevel()
+        window.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
         info = Label(
             window, text="Please declare here your keywords following this example: ")
@@ -73,10 +84,29 @@ def main():
                              command=get_text)
         button_close = Button(window, text="Close", command=window.destroy)
 
-        info.pack(fill='x', padx=50, pady=5)
+        info.pack(fill='x', padx=15, pady=3)
         example.pack(fill='x')
-        input_keywords.pack(padx=30, pady=5)
+        input_keywords.pack(padx=15, pady=3)
         button_save.pack()
+        button_close.pack()
+
+    def tutorial():
+        window_width = 600
+        window_height = 350
+
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+
+        x = (screen_width / 2)-(window_width / 2)
+        y = (screen_height / 2)-(window_height / 2)
+
+        window = Toplevel()
+
+        info = Label(
+            window, text="Ingo")
+
+        button_close = Button(window, text="Close", command=window.destroy)
+        info.pack(fill='x', padx=50, pady=5)
         button_close.pack()
 
     # widgets list
@@ -86,7 +116,7 @@ def main():
     label_picture = Label(image=main_picture)
 
     button_guide = Button(root, text="info",
-                          padx=10, pady=5, borderwidth=0)
+                          padx=10, pady=5, borderwidth=0, command=tutorial)
 
     button_upload = Button(root, image=upload_button,
                            padx=10, pady=5, command=upload, borderwidth=0)
