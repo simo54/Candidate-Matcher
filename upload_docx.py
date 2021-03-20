@@ -21,8 +21,8 @@ def upload_docx(file):
 
     hits = [x for x in results if x != 0]
     score = str("{:.0%}".format(len(hits) / len(results)))
-    value_row = [[str(os.path.basename(
-        file)), score]]
     email_user = re.search(r'[\w\.-]+@[\w\.-]+', text_formatted)
+    value_row = [[str(os.path.basename(
+        file)), str(score), str(email_user.group(0))]]
 
     load_and_write(value_row)
