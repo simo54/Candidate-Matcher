@@ -9,6 +9,7 @@ from PIL import ImageTk, Image
 from key_words import write_keywords, return_keys
 
 import os
+import webbrowser
 
 
 def main():
@@ -90,34 +91,16 @@ def main():
         button_save.pack()
         button_close.pack()
 
-    def tutorial():
-        window_width = 600
-        window_height = 350
-
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-
-        x = (screen_width / 2)-(window_width / 2)
-        y = (screen_height / 2)-(window_height / 2)
-
-        window = Toplevel()
-
-        info = Label(
-            window, text="Ingo")
-
-        button_close = Button(window, text="Close", command=window.destroy)
-        info.pack(fill='x', padx=50, pady=5)
-        button_close.pack()
+    def open_url():
+        url = "https://github.com/simo54/free_ats/blob/main/README.md"
+        webbrowser.open_new(url)
 
     # widgets list
     title_font = Font(family="Courier", size=36)
     title_text = Label(root, text="ATS", font=title_font)
-
     label_picture = Label(image=main_picture)
-
     button_guide = Button(root, text="info",
-                          padx=10, pady=5, borderwidth=0, command=tutorial)
-
+                          padx=10, pady=5, borderwidth=0, command=open_url)
     button_upload = Button(root, image=upload_button,
                            padx=10, pady=5, command=upload, borderwidth=0)
     button_keywords = Button(root, image=keys_button,
