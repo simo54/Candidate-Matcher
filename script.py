@@ -68,11 +68,13 @@ def main():
             window, text="Please declare here your keywords following this example: ")
         example = Label(window, text="Example: ")
         input = Text(window)
+        button_save = Button(window, text="Save", command=write_keywords)
         button_close = Button(window, text="Close", command=window.destroy)
 
         info.pack(fill='x', padx=50, pady=5)
         example.pack(fill='x')
         input.pack(padx=30, pady=5)
+        button_save.pack()
         button_close.pack()
 
     # widgets list
@@ -81,6 +83,9 @@ def main():
 
     label_picture = Label(image=main_picture)
 
+    button_guide = Button(root, text="info",
+                          padx=10, pady=5, borderwidth=0)
+
     button_upload = Button(root, image=upload_button,
                            padx=10, pady=5, command=upload, borderwidth=0)
     button_keywords = Button(root, image=keys_button,
@@ -88,16 +93,13 @@ def main():
     button_quit = Button(root, image=quit_button,
                          borderwidth=0, padx=10, pady=5, command=root.quit)
 
-    # popup_keywords = Toplevel()
-    # keywords_window = Label(popup_keywords, text="hey")
     # display widgets
     title_text.pack()
     label_picture.pack()
+    button_guide.pack()
     button_upload.pack()
     button_keywords.pack()
     button_quit.pack()
-
-    # label_keywords = 6
 
     # runner
     root.mainloop()
