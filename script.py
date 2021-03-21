@@ -10,6 +10,7 @@ from key_words import write_keywords, return_keys
 
 import os
 import webbrowser
+import time
 
 
 def main():
@@ -55,9 +56,7 @@ def main():
             else:
                 messagebox.showwarning(
                     "WARNING", "Please upload a valid document")
-
-    def upload_more():
-        messagebox.askquestion("askquestion", "Are you sure?")
+                break
 
     def define_keywords():
         def get_text():
