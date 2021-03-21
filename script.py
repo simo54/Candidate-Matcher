@@ -30,6 +30,7 @@ def main():
     root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
     # Assets Images
+    info_button = PhotoImage(file='assets/button_info.png')
     upload_button = PhotoImage(file='assets/button_upload.png')
     keys_button = PhotoImage(file='assets/button_keywords.png')
     quit_button = PhotoImage(file='assets/button_exit.png')
@@ -105,7 +106,7 @@ def main():
     title_font = Font(family="Courier", size=36)
     title_text = Label(root, text="ATS", font=title_font)
     label_picture = Label(image=main_picture)
-    button_guide = Button(root, text="info",
+    button_guide = Button(root, image=info_button,
                           padx=10, pady=5, borderwidth=0, command=open_url)
     button_upload = Button(root, image=upload_button,
                            padx=10, pady=5, command=upload, borderwidth=0)
