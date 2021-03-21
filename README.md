@@ -1,8 +1,6 @@
 # free_ats
 
-🚧 Project in progress 🚧
-
-![](demo.gif)
+![](screenshot.PNG)
 
 A free Applicant Tracking System for recruiters and small company with limited budget.
 
@@ -13,6 +11,8 @@ A free Applicant Tracking System for recruiters and small company with limited b
 - Open the excel file generated and get the score, the email and the phone number of each application
 
 ## How can I lunch it?
+
+After [downloading](https://github.com/simo54/free_ats/archive/refs/heads/main.zip) the repository navigate inside it and run **main.exe**
 
 ## Credits
 

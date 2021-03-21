@@ -85,7 +85,7 @@ def main():
         info = Label(
             window, text="Please declare here your keywords like below: ")
         example = Label(
-            window, text="teamwork, tkinter, agile, php", font=example_font)
+            window, text="teamwork tkinter agile php", font=example_font)
         input_keywords = Text(window, height=20, width=40)
         input_keywords.insert(1.0, return_keys())
         button_save = Button(window, image=save_button,
