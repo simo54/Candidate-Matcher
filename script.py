@@ -7,6 +7,7 @@ from upload_pdf import upload_pdf
 from upload_docx import upload_docx
 from PIL import ImageTk, Image
 from key_words import write_keywords, return_keys
+from upload_un_files import upload_un_files
 
 import os
 import webbrowser
@@ -54,7 +55,7 @@ def main():
                 upload_docx(file)
 
             else:
-                pass
+                upload_un_files(file)
 
     def define_keywords():
         def get_text():

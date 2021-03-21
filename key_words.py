@@ -15,9 +15,6 @@ def return_keys():
         return key_words
 
 
-print(return_keys())
-
-
 def write_keywords(keywords_text):
     txt = open("keywords.txt", "w")
     txt.truncate(0)
