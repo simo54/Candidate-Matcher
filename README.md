@@ -2,6 +2,8 @@
 
 🚧 Project in progress 🚧
 
+![](demo.gif)
+
 A free Applicant Tracking System for recruiters and small company with limited budget.
 
 ## How does it work?
