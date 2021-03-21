@@ -11,7 +11,6 @@ from upload_un_files import upload_un_files
 
 import os
 import webbrowser
-import time
 
 
 def main():
@@ -24,13 +23,10 @@ def main():
     # GUI position
     window_width = 800
     window_height = 550
-
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
-
     x = (screen_width / 2)-(window_width / 2)
     y = (screen_height / 2)-(window_height / 2)
-
     root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
     # Assets Images
@@ -42,20 +38,35 @@ def main():
     main_picture = ImageTk.PhotoImage(main_picture)
 
     def upload():
+
         file_path_list = filedialog.askopenfilenames(
             initialdir="/", title='Upload single or multiple .pdf and/or .docx files')
 
+        window_width = 100
+        window_height = 100
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        x = (screen_width / 2)-(window_width / 2)
+        y = (screen_height / 2)-(window_height / 2)
+        popup_loading = Toplevel()
+        popup_loading.geometry(
+            f'{window_width}x{window_height}+{int(x)}+{int(y)}')
+
+        info = Label(
+            popup_loading, text="Loading...")
+
+        info.pack(fill='x', padx=15, pady=15)
+
         for file in file_path_list:
             name, extension = os.path.splitext(file)
-
             if extension == '.pdf':
                 upload_pdf(file)
-
             elif extension == '.docx':
                 upload_docx(file)
-
             else:
                 upload_un_files(file)
+
+        popup_loading.after(5000, lambda: popup_loading.destroy())
 
     def define_keywords():
         def get_text():
@@ -64,13 +75,10 @@ def main():
 
         window_width = 600
         window_height = 550
-
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
-
         x = (screen_width / 2)-(window_width / 2)
         y = (screen_height / 2)-(window_height / 2)
-
         window = Toplevel()
         window.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
@@ -106,13 +114,12 @@ def main():
     button_quit = Button(root, image=quit_button,
                          borderwidth=0, padx=10, pady=5, command=root.quit)
 
-    # display widgets
-    title_text.pack()
-    label_picture.pack()
-    button_guide.pack()
-    button_upload.pack()
-    button_keywords.pack()
-    button_quit.pack()
+    title_text.grid(row=0, column=0, columnspan=5)
+    label_picture.grid(row=1, column=0, columnspan=5)
+    button_guide.grid(row=2, column=1, columnspan=1)
+    button_upload.grid(row=2, column=2, columnspan=1)
+    button_keywords.grid(row=2, column=3, columnspan=1)
+    button_quit.grid(row=2, column=4, columnspan=1)
 
     # runner
     root.mainloop()
