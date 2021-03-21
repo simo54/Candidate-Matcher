@@ -21,7 +21,7 @@ def main():
     root.iconbitmap('assets/mac_icon-icons.com_54610.ico')
 
     # GUI position
-    window_width = 600
+    window_width = 554
     window_height = 550
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -44,7 +44,7 @@ def main():
             initialdir="/", title='Upload single or multiple .pdf and/or .docx files')
 
         if len(file_path_list) != 0:
-            window_width = 100
+            window_width = 200
             window_height = 100
             screen_width = root.winfo_screenwidth()
             screen_height = root.winfo_screenheight()
@@ -75,7 +75,7 @@ def main():
             write_keywords(text_to_pass)
 
         window_width = 600
-        window_height = 550
+        window_height = 450
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
         x = (screen_width / 2)-(window_width / 2)
@@ -114,13 +114,15 @@ def main():
                              padx=10, pady=5, command=define_keywords, borderwidth=0)
     button_quit = Button(root, image=quit_button,
                          borderwidth=0, padx=10, pady=5, command=root.quit)
+    fake_row = Label()
 
     title_text.grid(row=0, column=0, columnspan=5)
     label_picture.grid(row=1, column=0, columnspan=5)
-    button_guide.grid(row=2, column=1, columnspan=1)
-    button_upload.grid(row=2, column=2, columnspan=1)
-    button_keywords.grid(row=2, column=3, columnspan=1)
-    button_quit.grid(row=2, column=4, columnspan=1)
+    fake_row.grid(row=2, column=0, columnspan=5)
+    button_guide.grid(row=3, column=1, columnspan=1)
+    button_upload.grid(row=3, column=2, columnspan=1)
+    button_keywords.grid(row=3, column=3, columnspan=1)
+    button_quit.grid(row=3, column=4, columnspan=1)
 
     # runner
     root.mainloop()
