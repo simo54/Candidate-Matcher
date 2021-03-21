@@ -34,15 +34,14 @@ def main():
     upload_button = PhotoImage(file='assets/button_upload.png')
     keys_button = PhotoImage(file='assets/button_keywords.png')
     quit_button = PhotoImage(file='assets/button_exit.png')
+    save_button = PhotoImage(file='assets/button_save.png')
     main_picture = Image.open("./assets/cup-of-coffee-1280537_1920.png")
     main_picture = main_picture.resize((550, 350), Image.ANTIALIAS)
     main_picture = ImageTk.PhotoImage(main_picture)
 
     def upload():
-
         file_path_list = filedialog.askopenfilenames(
             initialdir="/", title='Upload single or multiple .pdf and/or .docx files')
-
         if len(file_path_list) != 0:
             window_width = 200
             window_height = 100
@@ -74,8 +73,8 @@ def main():
             text_to_pass = input_keywords.get(1.0, "end-1c")
             write_keywords(text_to_pass)
 
-        window_width = 600
-        window_height = 450
+        window_width = 320
+        window_height = 480
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
         x = (screen_width / 2)-(window_width / 2)
@@ -83,20 +82,24 @@ def main():
         window = Toplevel()
         window.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
+        example_font = Font(family="Courier", size=12)
         info = Label(
-            window, text="Please declare here your keywords following this example: ")
-        example = Label(window, text="Example: ")
-        input_keywords = Text(window)
+            window, text="Please declare here your keywords like below: ")
+        example = Label(
+            window, text="teamwork, tkinter, agile, php", font=example_font)
+        input_keywords = Text(window, height=20, width=40)
         input_keywords.insert(1.0, return_keys())
-        button_save = Button(window, text="Save",
-                             command=get_text)
-        button_close = Button(window, text="Close", command=window.destroy)
+        button_save = Button(window, image=save_button,
+                             borderwidth=0, padx=10, pady=5, command=get_text)
+        button_close = Button(window, image=quit_button,
+                              borderwidth=0, padx=10, pady=5, command=window.destroy)
 
-        info.pack(fill='x', padx=15, pady=3)
-        example.pack(fill='x')
-        input_keywords.pack(padx=15, pady=3)
-        button_save.pack()
-        button_close.pack()
+        info.grid(row=0, column=0, columnspan=3, padx=(10, 10), pady=(10, 10))
+        example.grid(row=1, column=0, columnspan=3,
+                     padx=(10, 10), pady=(10, 10))
+        input_keywords.grid(row=2, column=0, columnspan=3)
+        button_save.grid(row=4, column=1)
+        button_close.grid(row=4, column=2)
 
     def open_url():
         url = "https://github.com/simo54/free_ats/blob/main/README.md"

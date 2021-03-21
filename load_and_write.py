@@ -10,7 +10,10 @@ def load_and_write(value_row):
             page.append(data)
         working_file.save(filename=excel_file)
     else:
+        column_name = [["File Name", "Score", "Email", "Phone"]]
         page = workbook.active
+        for col_name in column_name:
+            page.append(col_name)
         for data in value_row:
             page.append(data)
 
