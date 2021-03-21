@@ -54,9 +54,7 @@ def main():
                 upload_docx(file)
 
             else:
-                messagebox.showwarning(
-                    "WARNING", "Please upload a valid document")
-                break
+                pass
 
     def define_keywords():
         def get_text():
