@@ -14,6 +14,10 @@ A free Applicant Tracking System for recruiters and small company with limited b
 
 After [downloading](https://github.com/simo54/free_ats/archive/refs/heads/main.zip) the repository navigate inside it and run **main.exe**
 
+## Where do I find the generated files?
+
+You may find the generated files within the download folders.
+
 ## Credits
 
 [emoji](https://icon-icons.com/icon/mac-screen-monitor-computer/54610): [license cc](https://creativecommons.org/licenses/by/4.0/)
