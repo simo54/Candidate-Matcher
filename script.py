@@ -65,7 +65,6 @@ def main():
                     upload_docx(file)
                 else:
                     upload_un_files(file)
-
             popup_loading.after(5000, lambda: popup_loading.destroy())
 
     def define_keywords():
@@ -73,7 +72,7 @@ def main():
             text_to_pass = input_keywords.get(1.0, "end-1c")
             write_keywords(text_to_pass)
 
-        window_width = 320
+        window_width = 325
         window_height = 480
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
