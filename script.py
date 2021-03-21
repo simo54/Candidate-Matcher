@@ -21,7 +21,7 @@ def main():
     root.iconbitmap('assets/mac_icon-icons.com_54610.ico')
 
     # GUI position
-    window_width = 800
+    window_width = 600
     window_height = 550
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -42,31 +42,31 @@ def main():
         file_path_list = filedialog.askopenfilenames(
             initialdir="/", title='Upload single or multiple .pdf and/or .docx files')
 
-        window_width = 100
-        window_height = 100
-        screen_width = root.winfo_screenwidth()
-        screen_height = root.winfo_screenheight()
-        x = (screen_width / 2)-(window_width / 2)
-        y = (screen_height / 2)-(window_height / 2)
-        popup_loading = Toplevel()
-        popup_loading.geometry(
-            f'{window_width}x{window_height}+{int(x)}+{int(y)}')
+        if len(file_path_list) != 0:
+            window_width = 100
+            window_height = 100
+            screen_width = root.winfo_screenwidth()
+            screen_height = root.winfo_screenheight()
+            x = (screen_width / 2)-(window_width / 2)
+            y = (screen_height / 2)-(window_height / 2)
+            popup_loading = Toplevel()
+            popup_loading.geometry(
+                f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
-        info = Label(
-            popup_loading, text="Loading...")
+            info = Label(
+                popup_loading, text="Loading...")
+            info.pack(fill='x', padx=15, pady=15)
 
-        info.pack(fill='x', padx=15, pady=15)
+            for file in file_path_list:
+                name, extension = os.path.splitext(file)
+                if extension == '.pdf':
+                    upload_pdf(file)
+                elif extension == '.docx':
+                    upload_docx(file)
+                else:
+                    upload_un_files(file)
 
-        for file in file_path_list:
-            name, extension = os.path.splitext(file)
-            if extension == '.pdf':
-                upload_pdf(file)
-            elif extension == '.docx':
-                upload_docx(file)
-            else:
-                upload_un_files(file)
-
-        popup_loading.after(5000, lambda: popup_loading.destroy())
+            popup_loading.after(5000, lambda: popup_loading.destroy())
 
     def define_keywords():
         def get_text():
