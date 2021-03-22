@@ -1,6 +1,6 @@
 # free_ats
 
-![](screenshot.PNG)
+![](demo.gif)
 
 A free Applicant Tracking System for recruiters and small company with limited budget.
 
