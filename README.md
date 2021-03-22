@@ -1,8 +1,8 @@
 # free_ats
 
-![](demo.gif)
-
 A free Applicant Tracking System for recruiters and small company with limited budget.
+
+![](demo.gif)
 
 ## How does it work?
 
@@ -12,11 +12,15 @@ A free Applicant Tracking System for recruiters and small company with limited b
 
 ## How can I lunch it?
 
-After [downloading](https://github.com/simo54/free_ats/archive/refs/heads/main.zip) the repository navigate inside it and run **main.exe**
+After [downloading](https://github.com/simo54/free_ats/archive/refs/heads/main.zip) (need to be unzipped) the repository navigate inside it and run **main.exe**
 
 ## Where do I find the generated files?
 
-You may find the generated files within the download folders.
+You may find the generated files within the free_ats folder.
+
+## Issues
+
+Issues with the file? [Please open a new ticket](https://github.com/simo54/free_ats/issues/new)!
 
 ## Credits
 
@@ -25,3 +29,7 @@ You may find the generated files within the download folders.
 [customize-button](https://www.imagefu.com/create/button)
 
 [Image by Free Photos from Pixabay](https://pixabay.com/photos/cup-of-coffee-laptop-office-macbook-1280537/)
+
+## Boring stuff
+
+Please read carefully the [LICENSE](https://github.com/simo54/free_ats/blob/main/LICENSE) if you are thinking on downloading and run this software.
