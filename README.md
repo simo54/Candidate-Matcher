@@ -10,7 +10,7 @@ A free Applicant Tracking System for recruiters and small companies with limited
 - Upload one/multiple .docx/.pdf resume/s
 - Open the excel file generated and get the score, the email and the phone number of each application
 
-## How can I lunch it?
+## How can I launch it?
 
 After [downloading](https://github.com/simo54/free_ats/archive/refs/heads/main.zip) (need to be unzipped) the repository navigate inside it and run **main.exe**
 
