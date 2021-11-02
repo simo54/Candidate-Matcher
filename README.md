@@ -1,6 +1,6 @@
-# free_ats
+# Candidate Matcher
 
-A free Applicant Tracking System for recruiters and small companies with limited budget.
+A free Applicant Tracking System for recruiters and small companies.
 
 ![](demo.gif)
 
